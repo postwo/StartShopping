@@ -1,1 +1,70 @@
 
+server:
+  port: 80
+
+spring:
+  application:
+    name: spring-shop #Starting StartShoppingApplication 이게 변경된다 저이름으로
+
+  devtools:
+    restart:
+      enabled: true # 리스타트를 할 수 있게 하겠다라는 뜻이다
+
+    livereload:
+      enabled: true
+
+  thymeleaf:
+    cache: false # 캐시를 하지 않겠다
+
+  security:
+    user:
+      name: co
+      password: 12
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/shoppings?serverTimezone=Asia/Seoul
+    username: shopp
+    password: cos1234
+
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: create
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy # 카멜표기를 스테이크 표기로 변환
+    show-sql: true # SQL 구문 보이기
+    properties:
+      hibernate:
+        format_sql: true # 포멧 처리해서 보이기
+    database-platform: org.hibernate.dialect.MySQL8Dialect # Mysql8 버전 사용
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB # 한번에 요청할수 있는 사이즈
+
+
+
+
+  ####################################
+  # 파일 업로드 설정
+  ####################################
+itemImgLocation: C:/shopping/item
+uploadPath: file:///C:/shopping/
+
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace
+
+
+---
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
