@@ -2,17 +2,20 @@ package com.example.startshopping.service;
 
 import com.example.startshopping.dto.MemberDTO;
 import com.example.startshopping.entity.Member;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @SpringBootTest
+@Transactional //데이터가 저장되지 않게 하기위해 사용
 class MemberServiceTest {
 
     @Autowired
@@ -65,5 +68,22 @@ class MemberServiceTest {
         System.out.println(member);
         Member member1 = memberService.Memberinsert(member);
         System.out.println(member1);
+    }
+
+
+    @DisplayName("중복 회원 예외 발생 테스트")
+    @Test
+    void saveMember2() {
+        Member member1 = creaetMember();
+        Member member2 = creaetMember();
+         memberService.Memberinsert(member1); //통과
+
+        //중복
+        Throwable e = Assertions.assertThrows(IllegalStateException.class, ()->{
+            memberService.Memberinsert(member2);
+        });
+
+        //이미존재하는아이디입니다는 기대하는값이고 e.getMessage()는 본래 떠야할 메시지이다
+        Assertions.assertEquals("이미 가입된 회원입니다.",e.getMessage());
     }
 }

@@ -17,8 +17,10 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 
+        http.cors().disable();
         return http.build();
     }
+
 
     @Bean
     PasswordEncoder passwordEncoder(){

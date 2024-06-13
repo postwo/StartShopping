@@ -20,7 +20,7 @@ public class MemberService {
     }
 
 
-    //가입한적이 있는지 확인
+    //가입한적이 있는지 확인(중복검사)
     private void validateDuplicateMember(Member member) {
         Optional<Member> findMember = memberRepository.findByMemberEmail(member.getMemberEmail());
         if(findMember.isPresent()) {
