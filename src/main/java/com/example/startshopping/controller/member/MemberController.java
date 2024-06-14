@@ -2,6 +2,7 @@ package com.example.startshopping.controller.member;
 
 import com.example.startshopping.dto.MemberDTO;
 import com.example.startshopping.entity.Member;
+import com.example.startshopping.service.member.MemberListService;
 import com.example.startshopping.service.member.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("register")
 @RequiredArgsConstructor
@@ -21,6 +24,8 @@ public class MemberController {
 
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
+    private final MemberListService memberListService;
+
 
 
     //자동으로 컨틀롤러에 model을 안넣어도 들어가게 해준다
@@ -32,12 +37,9 @@ public class MemberController {
 
     //회원가입 페이지이동
     @GetMapping("userAgree")
-    public String register(Model model){
-//        model.addAttribute("memberDto",new MemberDTO());// 빈객체를 생성해서 보낸다
+    public String register(){
         return "memberRegister/userForm";
     }
-
-
 
 
     //회원가입
@@ -70,6 +72,15 @@ public class MemberController {
         }
 
         return "memberRegister/welcome";
+    }
+
+    //관리자 페이지에서 보여줄거 나중에 관리자 컨트롤로 이전
+    @GetMapping("memberList")
+    public String list(Model model){
+        //회원정보를 담아 memberList.html에 보낸다
+        List<MemberDTO> list = memberListService.memberlist();
+        model.addAttribute("dtos",list);
+        return "member/memberList";
     }
 
 

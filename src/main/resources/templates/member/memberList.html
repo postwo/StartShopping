@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+
+    <!--등록된 회원들을 출력 -->
+    <a href="memberRegist">회원등록</a> <br/>
+
+    <table border="1" width="600">
+        <!-- 회원 조회하기 -->
+        <form action="memberList" method="get">
+            <tr>
+                <td colspan="6">
+                    검색:
+                    <!--th:value="${searchWord} 컨트롤러에서 받아온값 -->
+                    <input type="search" name="searchWord" size="60" th:value="${searchWord}" />
+                    <input type="submit" value="검색">
+                </td>
+            </tr>
+        </form>
+
+        <!-- 체크한 사람들을 삭제 -->
+        <form action="membersDelete" method="post" id="frm">
+            <tr>
+                <td>회원번호</td>
+                <td>이름</td>
+                <td>이메일</td>
+                <td>등록일</td>
+                <td>
+                    <input type="checkbox" id="checkBoxs"/>
+                    <input type="submit" value="전체 삭제" />
+                </td>
+            </tr>
+            <!-- 상세보기 및 회원정보 수정 그리고 @validated를 이용한 유효성 검사 와 회원 강제 탈퇴 -->
+            <tr th:each="dto : ${dtos}"> <!--dtos를 dto로 변환해서 사용 -->
+                <!-- 타임리프를 사용해서 href를 사용할 경우 두가지 방법이 있다. 하나는 "|"를 사용하는 방법 또하나는 @{}를 사용한다.  -->
+                <td>[[${dto.id}]]</td>
+                <td><a th:href="|memberDetail?memberNum=${dto.id}|">[[${dto.memberName}]]</a></td>
+                <td><a th:href="@{memberDetail(memberNum=${dto.id})}">[[${dto.memberEmail}]]</a></td>
+
+
+                <td th:text="${#dates.format(dto.regDate, 'yyyy-MM-dd')}"></td>
+                <td><input type="checkbox" name="memDels" th:value="${dto.id}" />
+                    <input type="submit" value="단일 삭제"/>
+                </td>
+            </tr>
+
+
+
+        </form>
+    </table>
+
+</div>
+</body>
+</html>

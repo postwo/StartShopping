@@ -1,5 +1,6 @@
 package com.example.startshopping.dto;
 
+import com.example.startshopping.entity.Member;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -7,6 +8,7 @@ import jakarta.validation.constraints.Pattern;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -16,39 +18,68 @@ import java.util.Date;
 @ToString
 @Getter
 @Setter
-public class MemberDTO {
+public class MemberDTO  {
 
     // html에 전달할 오류 메세지를 command에서 설정해준다.
     // String자료형에서는 @NotEmpty, @NotBlank를 사용한다.
+
+    private Long id;
     // 비밀번호는 패턴을 사용해야 한다.영문자와 특수문자 그리고 숫자를 사용하고 8글자 이상
     @Pattern(regexp = "^(?=.*?[A-Za-z])(?=.*?[0-9])(?=.*?[#!@$%^&*-+?~]).{8,}$",
             message = "영문자와 숫자 그리고 특수문자가 포함된 8글자 이상")
-    String memberPw;
+    private String memberPw;
     @NotBlank(message = "비밀번호 확인을 입력해주세요.")
-    String memberPwCon;
-    String memberName;
+    private String memberPwCon;
+    private String memberName;
     @NotBlank(message = "주소를 입력하여 주세요.")
-    String memberAddr;
-    String memberAddrDetail; //detail이다
-    String memberPost;
+    private String memberAddr;
+    private String memberAddrDetail; //detail이다
+    private String memberPost;
     @NotBlank(message = "연락처을 입력하여 주세요.")
-    String memberPhone;
+    private String memberPhone;
     @NotEmpty(message = "이메일을 입력하여 주세요.")
-    String memberEmail; //아이디 대신 사용
+    private String memberEmail; //아이디 대신 사용
 
     //문자형 날짜를 자동형변환하기 위한 패턴이 필요..
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     // String이 아닌 모든 자료형은 @NotNull을 사용한다.
     @NotNull(message="생년월일을 입력해주세요.")
-    Date memberBirth;
-    // 나중에 사용할 멤버필드 추가
-    //생성날짜는 따로
-//    @DateTimeFormat(pattern = "yyyy-MM-dd")
-//    Date memberRegiDate;
+    private Date memberBirth;
+
 
     Integer point;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date RegDate;
+
+
+
+
     //비밀번호와 비밀번호확인이 같은지 확인 하기 위한 메서드
     public boolean isMemberPwEqualsMemberPwCon() {
         return memberPw.equals(memberPwCon);
     }
+
+
+    //데이터베이스에서 받은값을 서비스 컨트롤러에서 사용하기위해
+    public static MemberDTO createMemberDTO(Member member){
+
+        MemberDTO memberdto = MemberDTO.builder()
+                .id(member.getId())
+                .memberEmail(member.getMemberEmail())
+                .memberAddr(member.getMemberAddr())
+                .memberAddrDetail(member.getMemberAddrDetail())
+                .memberBirth(member.getMemberBirth())
+                .memberName(member.getMemberName())
+                .memberPost(member.getMemberPost())
+                .memberPhone(member.getMemberPhone())
+                .RegDate(member.getRegDate())
+                .build();
+
+        return memberdto;
+    }
+
+
+
+
 }

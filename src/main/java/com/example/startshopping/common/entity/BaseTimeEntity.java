@@ -9,7 +9,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 //jpa에게 해당 entity는 auditing 기능을 사용한다는 것을 알리는 어노테이션이다
 @EntityListeners(value = {AuditingEntityListener.class})//엔티티들이 변동이 생겼다 그러면 자동으로 감지
@@ -20,10 +20,11 @@ public abstract class BaseTimeEntity { //추상클래스로 만든다
 
     @CreatedDate
     @Column(updatable = false) // 수정할수 없다
-    private LocalDateTime regDate; //생성시간
+    //원래는 localdatetime을 쓰는게 맞는데 지금은 html에서 찾을수없다고 임시로 사용
+    private Date regDate; //생성시간
 
     @LastModifiedDate
-    private LocalDateTime updateTime; //수정시간
+    private Date updateTime; //수정시간
 
 
 }

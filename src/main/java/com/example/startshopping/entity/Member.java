@@ -24,7 +24,6 @@ public class Member extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_Id")
     private Long id;
-
     @Column(unique = true) //등록할때 중복이 안되도록하기 위해 사용
     private String memberEmail; //아이디로 사용
     private String memberPw;
@@ -45,6 +44,7 @@ public class Member extends BaseEntity {
     public static Member createMember(MemberDTO memberDTO, PasswordEncoder passwordEncoder){
 
         Member member = Member.builder()
+                .id(memberDTO.getId())
                 .memberAddr(memberDTO.getMemberAddr())
                 .memberEmail(memberDTO.getMemberEmail())
                 .role(Role.USER)
