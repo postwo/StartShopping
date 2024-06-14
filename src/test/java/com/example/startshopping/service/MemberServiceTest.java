@@ -2,6 +2,7 @@ package com.example.startshopping.service;
 
 import com.example.startshopping.dto.MemberDTO;
 import com.example.startshopping.entity.Member;
+import com.example.startshopping.service.member.MemberService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

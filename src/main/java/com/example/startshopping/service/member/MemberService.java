@@ -1,4 +1,4 @@
-package com.example.startshopping.service;
+package com.example.startshopping.service.member;
 
 import com.example.startshopping.entity.Member;
 import com.example.startshopping.repository.MemberRepository;
