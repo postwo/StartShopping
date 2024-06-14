@@ -26,7 +26,6 @@ public class Member {
 
     @Column(unique = true) //등록할때 중복이 안되도록하기 위해 사용
     private String memberEmail; //아이디로 사용
-    private String memberNum; //번호 자동 부여
     private String memberPw;
     private String memberName;
     private String memberAddr;
@@ -52,7 +51,6 @@ public class Member {
                 .memberAddrDetail(memberDTO.getMemberAddrDetail())
                 .memberBirth(memberDTO.getMemberBirth())
                 .memberName(memberDTO.getMemberName())
-                .memberNum(memberDTO.getMemberNum())
                 .memberPost(memberDTO.getMemberPost())
                 .memberPhone(memberDTO.getMemberPhone())
                 .build();

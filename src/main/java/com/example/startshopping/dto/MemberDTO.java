@@ -20,7 +20,6 @@ public class MemberDTO {
 
     // html에 전달할 오류 메세지를 command에서 설정해준다.
     // String자료형에서는 @NotEmpty, @NotBlank를 사용한다.
-    String memberNum;
     // 비밀번호는 패턴을 사용해야 한다.영문자와 특수문자 그리고 숫자를 사용하고 8글자 이상
     @Pattern(regexp = "^(?=.*?[A-Za-z])(?=.*?[0-9])(?=.*?[#!@$%^&*-+?~]).{8,}$",
             message = "영문자와 숫자 그리고 특수문자가 포함된 8글자 이상")

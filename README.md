@@ -16,3 +16,7 @@ intellij로 변경안해서 test코드중 계속 에러뜨는거였다
 
 
 <link rel="stylesheet" href="/css/regiestcss/regietst.css"> css넣는방법
+
+
+오류
+비밀번호 재확인 일치 하지 않으면 문자 띄워주기가 안됨

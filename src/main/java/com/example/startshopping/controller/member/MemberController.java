@@ -34,7 +34,7 @@ public class MemberController {
     @GetMapping("userAgree")
     public String register(Model model){
 //        model.addAttribute("memberDto",new MemberDTO());// 빈객체를 생성해서 보낸다
-        return "memberRegist/userForm";
+        return "memberRegister/userForm";
     }
 
 
@@ -48,7 +48,13 @@ public class MemberController {
 
         //오류가 있는 경우 오류 메시지가 출력되게 한다
         if (result.hasErrors()){
-            return "memberRegist/userForm";
+            return "memberRegister/userForm";
+        }
+
+        //비밀번호
+        if (!memberDTO.isMemberPwEqualsMemberPwCon()){
+            result.rejectValue("memberPwCon","memberDTO.memberPwCon","비밀번호 확인이 틀렸습니다.");
+            return "memberRegister/userForm";
         }
 
         try{
@@ -60,10 +66,12 @@ public class MemberController {
             model.addAttribute("userEmail", member.getMemberEmail());
         }catch (IllegalStateException e){
             model.addAttribute("errorMessage",e.getMessage());
-            return "memberRegist/userForm";
+            return "memberRegister/userForm";
         }
 
-        return "memberRegist/welcome";
+        return "memberRegister/welcome";
     }
+
+
 
 }
