@@ -1,4 +1,6 @@
 package com.example.startshopping.entity;
 
-public class Employee {
+import com.example.startshopping.common.entity.BaseEntity;
+
+public class Employee extends BaseEntity {
 }

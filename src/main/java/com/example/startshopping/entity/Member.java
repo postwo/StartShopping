@@ -1,6 +1,7 @@
 package com.example.startshopping.entity;
 
 
+import com.example.startshopping.common.entity.BaseEntity;
 import com.example.startshopping.constant.Role;
 import com.example.startshopping.dto.MemberDTO;
 import jakarta.persistence.*;
@@ -16,7 +17,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-public class Member {
+public class Member extends BaseEntity {
 
 
     @Id
@@ -31,13 +32,13 @@ public class Member {
     private String memberAddr;
     private String memberAddrDetail;
     private String memberPost;
-//    private Date memberRegistDate; //생성 날짜
     private String memberPhone;
     private Date memberBirth;
 
 
     @Enumerated(EnumType.STRING) //ORDINAL숫자를 다룬다는거다
     private Role role;
+
 
 
     // 프론트에서 정보를 받아서 데이터베이스 저장해주기 위해 사용
