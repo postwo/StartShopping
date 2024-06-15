@@ -77,7 +77,7 @@ public class MemberController {
     @GetMapping("memberList")
     public String list(@RequestParam(value = "searchWord",required = false) String searchWord
                         ,@RequestParam(value = "page", defaultValue = "0") int page,
-                       @RequestParam(value = "size", defaultValue = "1") int size,
+                       @RequestParam(value = "size", defaultValue = "5") int size,
                        Model model){
 
         //회원정보를 담아 memberList.html에 보낸다

@@ -63,7 +63,29 @@
                 <td colspan="5">검색 결과가 없습니다.</td>
             </tr>
 
+            <tr align="center">
+                <td colspan="5">
+                    <th:block th:if="${currentPage <= 0}">
+                        [이전]
+                    </th:block>
+                    <th:block th:if="${currentPage > 0}">
+                        <a th:href="@{memberList(page=0, searchWord=${searchWord})}">[이전]</a>
+                    </th:block>
 
+                    <th:block th:each="pageNum : ${#numbers.sequence(0, totalPages - 1)}">
+                        <a th:href="@{memberList(page=${pageNum}, searchWord=${searchWord})}"
+                           th:text="${pageNum + 1}"
+                           th:class="${currentPage == pageNum} ? 'active-link' : ''"></a>
+                    </th:block>
+
+                    <th:block th:if="${currentPage >= totalPages - 1}">
+                        [다음]
+                    </th:block>
+                    <th:block th:if="${currentPage < totalPages - 1}">
+                        <a th:href="@{memberList(page=${totalPages - 1}, searchWord=${searchWord})}">[다음]</a>
+                    </th:block>
+                </td>
+            </tr>
 
 
         </form>
@@ -71,22 +93,8 @@
 
     </table>
 
-    <div id="pagination">
-        <ul class="pagination">
-            <li th:class="${currentPage == 0} ? 'disabled' : ''">
-                <a th:href="@{${'memberList'}(page=0, size=${size}, searchWord=${searchWord})}">이전</a>
-            </li>
-            <li th:each="pageNum : ${#numbers.sequence(0, totalPages - 1)}"
-                th:class="${currentPage == pageNum} ? 'active' : ''">
-                <a th:href="@{${'memberList'}(page=${pageNum}, size=${size}, searchWord=${searchWord})}"
-                   th:text="${pageNum + 1}"
-                   th:class="${currentPage == pageNum} ? 'active-link' : ''"></a>
-            </li>
-            <li th:class="${currentPage == totalPages - 1} ? 'disabled' : ''">
-                <a th:href="@{${'memberList'}(page=${totalPages - 1}, size=${size}, searchWord=${searchWord})}">다음</a>
-            </li>
-        </ul>
-    </div>
+
+
 </div>
 </body>
 </html>
