@@ -38,6 +38,6 @@
 
     });
 
-     function del(goodsNum){
-         location.href="cartDel?id="+id;
+     function del(id){
+         location.href="memberDel?id="+id;
      }

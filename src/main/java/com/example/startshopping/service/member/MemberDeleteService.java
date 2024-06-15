@@ -10,7 +10,16 @@ public class MemberDeleteService {
 
     private final MemberRepository memberRepository;
 
-    public void Delete(String[] checkbox) {
-//        memberRepository.
+    //전체 삭제
+    public void Delete(String [] memDels) {
+
+        for (String id : memDels){
+           memberRepository.deleteById(Long.valueOf(id));
+        }
+    }
+
+    //단일 삭제
+    public void del(String id) {
+        memberRepository.deleteById(Long.valueOf(id));
     }
 }

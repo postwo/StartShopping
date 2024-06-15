@@ -43,6 +43,8 @@ public class SecurityConfig {
         http.exceptionHandling(exception -> exception
                 .authenticationEntryPoint(new CustomAuthenticationEntryPoint()));
 
+        // CSRF 사용하지 않음 (테스트 환경에서만 사용할 것)
+//        http.csrf().disable(); //이걸 안걸면 페이지 요청마다 403이 뜬다
         return http.build();
 
     }

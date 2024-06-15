@@ -41,3 +41,36 @@ java: Attempt to recreate a file for type com.example.startshopping.entity.QOaut
 JWT는 클라이언트 측에서 저장하고, 요청 시마다 포함하여 서버에 전송합니다.
 서버는 JWT를 검증하여 사용자를 인증하고, SecurityContextHolder를 통해 인증 정보를 관리합니다.
 이 방법을 통해 사용자는 각 브라우저나 기기에서 독립적인 인증 상태를 유지할 수 있으며, 다른 계정으로 로그인할 수 있습니다.
+
+
+post 요청에는 시큐리티를 사용하면 꼭 프론트 단에
+<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+이거를 넣어준다 
+
+ajax 요청 같은경우는 밑의 방식처럼 처리할 수 있다
+
+**<!-- Thymeleaf를 사용하여 CSRF 토큰을 설정 -->
+<input type="hidden" id="_csrf" name="${_csrf.parameterName}" value="${_csrf.token}">
+
+<script>
+    // JavaScript에서 CSRF 토큰 값을 가져와서 Ajax 요청에 포함
+    var csrfToken = document.getElementById("_csrf").value;
+
+    // 예시: jQuery를 사용한 Ajax 요청
+    $.ajax({
+        url: '/your-endpoint',
+        type: 'POST',
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader('${_csrf.headerName}', csrfToken); // CSRF 헤더 설정
+        },
+        data: {
+            // Ajax 요청 데이터
+        },
+        success: function(data) {
+            // 성공적으로 요청 처리 후의 작업
+        },
+        error: function(xhr, status, error) {
+            // 오류 발생 시 처리
+        }
+    });
+</script>

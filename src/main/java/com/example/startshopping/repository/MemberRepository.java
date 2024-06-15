@@ -19,5 +19,6 @@
         Page<Member> findAllBySearchWord(@Param("searchWord") String searchWord, Pageable pageable);
 
 
+        void deleteById( Long id);
 
     }
