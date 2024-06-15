@@ -1,0 +1,11 @@
+#memberList {
+    border: 1px solid black;
+    width: 600px;
+    text-align: center; /* 내용을 가운데 정렬합니다. */
+    margin: 0 auto; /* 좌우 여백을 자동으로 설정하여 가운데 정렬합니다. */
+}
+
+#memberList td, #memberList th {
+    border: 1px solid black; /* 각 셀에 테두리를 설정합니다. */
+    padding: 8px; /* 셀의 안 여백을 조정합니다. */
+}

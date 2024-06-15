@@ -50,7 +50,6 @@ class MemberServiceTest {
                 .memberAddrDetail("과명시")
                 .memberBirth(memberBirthDate)
                 .memberName("유진")
-                .memberNum("10001")
                 .memberPost("ㅁㄴㅇㄹㄴㅇㅁ")
                 .memberPhone("010-123-124124")
                 .build();
@@ -80,11 +79,11 @@ class MemberServiceTest {
          memberService.Memberinsert(member1); //통과
 
         //중복
-        Throwable e = Assertions.assertThrows(IllegalStateException.class, ()->{
-            memberService.Memberinsert(member2);
-        });
+Throwable e = Assertions.assertThrows(IllegalStateException.class, ()->{
+    memberService.Memberinsert(member2);
+});
 
-        //이미존재하는아이디입니다는 기대하는값이고 e.getMessage()는 본래 떠야할 메시지이다
+//이미존재하는아이디입니다는 기대하는값이고 e.getMessage()는 본래 떠야할 메시지이다
         Assertions.assertEquals("이미 가입된 회원입니다.",e.getMessage());
-    }
+        }
 }

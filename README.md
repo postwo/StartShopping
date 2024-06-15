@@ -21,9 +21,14 @@ intellij로 변경안해서 test코드중 계속 에러뜨는거였다
 오류
 비밀번호 재확인 일치 하지 않으면 문자 띄워주기가 안됨
 
-querydsl생성방법
+1.querydsl생성방법(querydsl은 jpql(=nativequery)보다 상위버전이라고 생각하면 된다)
 gradle에다가 의존성을 다주입후 
 gradle에 들어가서 other 에서 compilejava를 누르면 q(entity)가 생성된다
 ![querydsl생성방법1.PNG](..%2F..%2FUsers%2F%EC%B5%9C%EC%B9%98%EC%96%B8%2FOneDrive%2F%EC%82%AC%EC%A7%84%2F%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%2Fquerydsl%EC%83%9D%EC%84%B1%EB%B0%A9%EB%B2%951.PNG)
 
 ![Q클래스 생성.PNG](..%2F..%2FUsers%2F%EC%B5%9C%EC%B9%98%EC%96%B8%2FOneDrive%2F%EC%82%AC%EC%A7%84%2F%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%2FQ%ED%81%B4%EB%9E%98%EC%8A%A4%20%EC%83%9D%EC%84%B1.PNG)
+
+
+
+querydsl 생성하고 이러한 에러가 뜨면(Qentity 재생성 오류)
+java: Attempt to recreate a file for type com.example.startshopping.entity.QOauth2Entity
