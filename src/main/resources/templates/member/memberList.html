@@ -8,7 +8,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link th:href="@{/css/memberList.css}" rel="stylesheet">
+    <link th:href="@{/css/member/memberList.css}" rel="stylesheet">
+    <script src="/js/member/memberList.js"></script>
 </head>
 
 
@@ -28,18 +29,23 @@
                 <input type="search" name="searchWord" size="60"/>
                 <input type="submit" value="검색">
             </td>
+
+
         </tr>
-    </form>
+        </form>
 
         <!-- 체크한 사람들을 삭제 -->
         <form action="membersDelete" method="post" id="frm">
             <!-- 테이블 헤더 -->
             <tr>
-                <th>회원번호</th>
-                <th>이름</th>
-                <th>이메일</th>
-                <th>등록일</th>
-                <th>삭제</th>
+                <td>회원번호</td>
+                <td>이름</td>
+                <td>이메일</td>
+                <td>등록일</td>
+                <td>
+                    <input type="checkbox" id="checkBoxs"/>
+                    <input type="submit" value="전체 삭제" />
+                </td>
             </tr>
 
             <!-- 상세보기 및 회원정보 수정 그리고 @validated를 이용한 유효성 검사 와 회원 강제 탈퇴 -->
@@ -50,15 +56,37 @@
                 <td th:text="${#dates.format(dto.regDate, 'yyyy-MM-dd')}"></td>
                 <td>
                     <input type="checkbox" name="memDels" th:value="${dto.id}" />
-                    <input type="submit" value="단일 삭제"/>
+                    <input type="button"  value="삭제" th:attr="onclick=|del('${dto.id}');|"/>
                 </td>
             </tr>
             <tr th:if="${#lists.isEmpty(dtos)}">
                 <td colspan="5">검색 결과가 없습니다.</td>
             </tr>
 
+
+
+
         </form>
+
+
     </table>
+
+    <div id="pagination">
+        <ul class="pagination">
+            <li th:class="${currentPage == 0} ? 'disabled' : ''">
+                <a th:href="@{${'memberList'}(page=0, size=${size}, searchWord=${searchWord})}">이전</a>
+            </li>
+            <li th:each="pageNum : ${#numbers.sequence(0, totalPages - 1)}"
+                th:class="${currentPage == pageNum} ? 'active' : ''">
+                <a th:href="@{${'memberList'}(page=${pageNum}, size=${size}, searchWord=${searchWord})}"
+                   th:text="${pageNum + 1}"
+                   th:class="${currentPage == pageNum} ? 'active-link' : ''"></a>
+            </li>
+            <li th:class="${currentPage == totalPages - 1} ? 'disabled' : ''">
+                <a th:href="@{${'memberList'}(page=${totalPages - 1}, size=${size}, searchWord=${searchWord})}">다음</a>
+            </li>
+        </ul>
+    </div>
 </div>
 </body>
 </html>

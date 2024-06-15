@@ -39,6 +39,7 @@ public class SecurityConfig {
                 .anyRequest().authenticated());
 
 
+        //403페이지 처리
         http.exceptionHandling(exception -> exception
                 .authenticationEntryPoint(new CustomAuthenticationEntryPoint()));
 

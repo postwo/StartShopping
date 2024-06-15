@@ -2,17 +2,17 @@ package com.example.startshopping.controller.member;
 
 import com.example.startshopping.dto.MemberDTO;
 import com.example.startshopping.entity.Member;
+import com.example.startshopping.service.member.MemberDeleteService;
 import com.example.startshopping.service.member.MemberListService;
 import com.example.startshopping.service.member.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("register")
@@ -22,6 +22,7 @@ public class MemberController {
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
     private final MemberListService memberListService;
+    private final MemberDeleteService memberDeleteService;
 
 
 
@@ -74,13 +75,26 @@ public class MemberController {
 
     //관리자 페이지에서 보여줄거
     @GetMapping("memberList")
-    public String list(@RequestParam(value = "searchWord",required = false) String searchWord, Model model){
+    public String list(@RequestParam(value = "searchWord",required = false) String searchWord
+                        ,@RequestParam(value = "page", defaultValue = "0") int page,
+                       @RequestParam(value = "size", defaultValue = "1") int size,
+                       Model model){
+
         //회원정보를 담아 memberList.html에 보낸다
-        List<MemberDTO> members = memberListService.getAllMembers(searchWord);
-        model.addAttribute("dtos", members);
+        Page<MemberDTO> members = memberListService.getAllMembers(searchWord,page,size);
+
+        model.addAttribute("dtos", members.getContent());//현재 페이지목록
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", members.getTotalPages());
+
         return "member/memberList";
     }
 
 
+
+    @PostMapping("membersDelete")
+    public void del(String[] checkbox){
+    memberDeleteService.Delete(checkbox);
+    }
 
 }
