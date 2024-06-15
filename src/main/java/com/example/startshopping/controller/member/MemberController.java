@@ -74,6 +74,7 @@ public class MemberController {
         return "memberRegister/welcome";
     }
 
+
     //관리자 페이지에서 보여줄거 나중에 관리자 컨트롤로 이전
     @GetMapping("memberList")
     public String list(Model model){
