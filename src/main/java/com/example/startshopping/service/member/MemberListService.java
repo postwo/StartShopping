@@ -15,14 +15,24 @@ public class MemberListService {
 
     private final MemberRepository memberRepository;
 
-    public List<MemberDTO> memberlist(){
 
-       List<Member> list = memberRepository.findAll();
-
-        //MemberDTO 리스트로 변경
-       return list.stream().
-               map(MemberDTO::createMemberDTO).
-               collect(Collectors.toList());
+    // 모든 회원 리스트 조회 및 검색 기능
+    public List<MemberDTO> getAllMembers(String searchWord) {
+        List<Member> members;
+        if (searchWord != null && !searchWord.isEmpty()) {
+            members = memberRepository.findAllBySearchWord("%" + searchWord + "%");
+        } else {
+            members = memberRepository.findAll();
+        }
+        return members.stream()
+                .map(MemberDTO::createMemberDTO)
+                .collect(Collectors.toList());
     }
+
+
+
+
+
+
 
 }

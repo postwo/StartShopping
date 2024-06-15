@@ -22,15 +22,14 @@
     <table id="memberList">
         <!-- 회원 조회하기 -->
         <form action="memberList" method="get">
-            <tr>
-                <td colspan="6">
-                    검색:
-                    <!-- th:value="${searchWord} 컨트롤러에서 받아온값 -->
-                    <input type="search" name="searchWord" size="60" th:value="${searchWord}" />
-                    <input type="submit" value="검색">
-                </td>
-            </tr>
-        </form>
+        <tr>
+            <td colspan="6">
+                검색:
+                <input type="search" name="searchWord" size="60"/>
+                <input type="submit" value="검색">
+            </td>
+        </tr>
+    </form>
 
         <!-- 체크한 사람들을 삭제 -->
         <form action="membersDelete" method="post" id="frm">
@@ -53,6 +52,9 @@
                     <input type="checkbox" name="memDels" th:value="${dto.id}" />
                     <input type="submit" value="단일 삭제"/>
                 </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(dtos)}">
+                <td colspan="5">검색 결과가 없습니다.</td>
             </tr>
 
         </form>

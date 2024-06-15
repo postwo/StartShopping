@@ -32,3 +32,12 @@ gradle에 들어가서 other 에서 compilejava를 누르면 q(entity)가 생성
 
 querydsl 생성하고 이러한 에러가 뜨면(Qentity 재생성 오류)
 java: Attempt to recreate a file for type com.example.startshopping.entity.QOauth2Entity
+
+
+
+
+<나중에 이방식으로 다 대체하기(중요)>
+세션 대신 JWT를 사용하여 각 브라우저나 기기에서 독립적인 인증 상태를 유지할 수 있습니다.
+JWT는 클라이언트 측에서 저장하고, 요청 시마다 포함하여 서버에 전송합니다.
+서버는 JWT를 검증하여 사용자를 인증하고, SecurityContextHolder를 통해 인증 정보를 관리합니다.
+이 방법을 통해 사용자는 각 브라우저나 기기에서 독립적인 인증 상태를 유지할 수 있으며, 다른 계정으로 로그인할 수 있습니다.

@@ -10,10 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -75,12 +72,12 @@ public class MemberController {
     }
 
 
-    //관리자 페이지에서 보여줄거 나중에 관리자 컨트롤로 이전
+    //관리자 페이지에서 보여줄거
     @GetMapping("memberList")
-    public String list(Model model){
+    public String list(@RequestParam(value = "searchWord",required = false) String searchWord, Model model){
         //회원정보를 담아 memberList.html에 보낸다
-        List<MemberDTO> list = memberListService.memberlist();
-        model.addAttribute("dtos",list);
+        List<MemberDTO> members = memberListService.getAllMembers(searchWord);
+        model.addAttribute("dtos", members);
         return "member/memberList";
     }
 
