@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .member-table {
+            margin-bottom: 20px; /* 테이블 간격 설정 */
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+
+
+    <div th:each="member : ${dto}">
+        <table class="member-table" border="1" width="600">
+            <tr>
+                <th>이름</th>
+                <td th:text="${member.memberName}"></td>
+            </tr>
+            <tr>
+                <th>주소</th>
+                <td th:text="${member.memberAddr}"></td>
+            </tr>
+            <tr>
+                <th>상세 주소</th>
+                <td th:text="${member.memberAddrDetail}"></td>
+            </tr>
+            <tr>
+                <th>우편 번호</th>
+                <td th:text="${member.memberPost}"></td>
+            </tr>
+            <tr>
+                <th>전화 번호</th>
+                <td th:text="${member.memberPhone}"></td>
+            </tr>
+            <tr>
+                <th>이메일</th>
+                <td th:text="${member.memberEmail}"></td>
+            </tr>
+            <tr>
+                <th>등록일</th>
+                <td th:text="${#dates.format(member.regDate, 'yyyy-MM-dd')}"></td>
+            </tr>
+            <tr>
+                <th>회원정보 수정</th>
+                <td>
+                    <button><a th:href="@{|/user/userUpdate/${member.memberName}|}">회원정보수정</a></button>
+                </td>
+            </tr>
+        </table>
+        <br/>
+    </div>
+</div>
+</body>
+</html>

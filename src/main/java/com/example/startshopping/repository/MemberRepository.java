@@ -12,7 +12,7 @@
 
     public interface MemberRepository extends JpaRepository<Member,Long> {
 
-            Optional<Member> findByMemberEmail(String memberEmail);// 이메일이 있을수도 있고 없을수도 있어서 optional을 사용
+        Optional<Member> findByMemberEmail(String memberEmail);// 이메일이 있을수도 있고 없을수도 있어서 optional을 사용
 
 
         @Query("SELECT m FROM Member m WHERE " +
@@ -24,4 +24,5 @@
 
         //관리자 일반회원 리스트
         List<Member> findByMemberName(String memberName);
+
     }

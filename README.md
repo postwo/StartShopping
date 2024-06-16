@@ -74,3 +74,8 @@ ajax 요청 같은경우는 밑의 방식처럼 처리할 수 있다
         }
     });
 </script>
+
+
+
+Name for argument of type [java.lang.String] not specified, and parameter name information not available via reflection. Ensure that the compiler uses the '-parameters' flag
+이렇나 에러가 뜨면 requestparam으로 명칭을똑같이 맞춰주든가 pathvariable써서 똑같이 맞춰주든가 해야한다

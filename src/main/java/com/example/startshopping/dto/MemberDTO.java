@@ -8,7 +8,6 @@ import jakarta.validation.constraints.Pattern;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -51,7 +50,6 @@ public class MemberDTO  {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date RegDate;
-
 
 
 
