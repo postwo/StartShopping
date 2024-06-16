@@ -7,6 +7,7 @@
     import org.springframework.data.jpa.repository.Query;
     import org.springframework.data.repository.query.Param;
 
+    import java.util.List;
     import java.util.Optional;
 
     public interface MemberRepository extends JpaRepository<Member,Long> {
@@ -21,4 +22,6 @@
 
         void deleteById( Long id);
 
+        //관리자 일반회원 리스트
+        List<Member> findByMemberName(String memberName);
     }

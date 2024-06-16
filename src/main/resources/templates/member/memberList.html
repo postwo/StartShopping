@@ -50,8 +50,9 @@
             <!-- 상세보기 및 회원정보 수정 그리고 @validated를 이용한 유효성 검사 와 회원 강제 탈퇴 -->
             <tr th:each="dto : ${dtos}">
                 <td>[[${dto.id}]]</td>
-                <td><a th:href="|memberDetail?memberNum=${dto.id}|">[[${dto.memberName}]]</a></td>
-                <td><a th:href="@{memberDetail(memberNum=${dto.id})}">[[${dto.memberEmail}]]</a></td>
+                <!--memberName 매개변수명 -->
+                <td><a th:href="|memberDetail?memberName=${dto.memberName}|">[[${dto.memberName}]]</a></td>
+                <td><a th:href="@{memberDetail(memberName=${dto.memberName})}">[[${dto.memberEmail}]]</a></td>
                 <td th:text="${#dates.format(dto.regDate, 'yyyy-MM-dd')}"></td>
                 <td>
                     <input type="checkbox" name="memDels" th:value="${dto.id}" />

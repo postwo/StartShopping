@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        .member-table {
+            margin-bottom: 20px; /* 테이블 간격 설정 */
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <div th:each="dto : ${dto}">
+        <table class="member-table" border="1" width="600">
+            <tr>
+                <th>이름</th>
+                <td>[[${dto.memberName}]]</td>
+            </tr>
+            <tr>
+                <th>주소</th>
+                <td>[[${dto.memberAddr}]]</td>
+            </tr>
+            <tr>
+                <th>상세 주소</th>
+                <td>[[${dto.memberAddrDetail}]]</td>
+            </tr>
+            <tr>
+                <th>우편 번호</th>
+                <td>[[${dto.memberPost}]]</td>
+            </tr>
+            <tr>
+                <th>전화 번호</th>
+                <td>[[${dto.memberPhone}]]</td>
+            </tr>
+            <tr>
+                <th>이메일</th>
+                <td>[[${dto.memberEmail}]]</td>
+            </tr>
+            <tr>
+                <th>등록일</th>
+                <td>[[${#dates.format(dto.regDate,'yyyy-MM-dd')}]]</td>
+            </tr>
+            <tr>
+                <th>회원 강제 탈퇴</th>
+                <td>
+                    <a th:href="@{|/memberdelete/${dto.memberName}|}">회원 강제 탈퇴</a>
+                </td>
+            </tr>
+        </table>
+        <br/>
+    </div>
+
+    <a th:href="@{/admin/memberList}">회원 목록</a>
+
+</div>
+</body>
+</html>

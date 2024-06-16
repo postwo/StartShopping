@@ -33,7 +33,7 @@ public class SecurityConfig {
 
         // 각 페이지에 대한 접근 권한 설정
         http.authorizeHttpRequests(request -> request
-                .requestMatchers("/css/**", "/js/**", "/img/**").permitAll()
+                .requestMatchers("/css/**", "/js/**", "/img/**","/error").permitAll() //"/error"999에러 해결
                 .requestMatchers("/", "/member/**", "/item/**", "/images/**","/register/**").permitAll() //ajax 요청명도 여기다 써줘야한다
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated());
